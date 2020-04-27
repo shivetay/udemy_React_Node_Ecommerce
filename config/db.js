@@ -12,7 +12,7 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
-    console.log('MongoDB running O_O');
+    console.log('MongoDB running O_o');
   } catch (err) {
     console.error(err.message);
     //after catching error this will exit whole process

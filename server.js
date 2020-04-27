@@ -4,6 +4,9 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const helmet = require('helmet');
 
+/* Routes */
+const userRoutes = require('./routes/user.routes');
+
 const app = express();
 
 /* DB connection */
@@ -18,7 +21,7 @@ app.use(
 );
 
 /* Define routes */
-app.use('/api/test', require('./routes/dummy.routes'));
+app.use('/api', userRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: '404 not found...' });

@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const connectDB = require('./config/db');
 const cors = require('cors');
-const helmet = require('helmet');
 const morgan = require('morgan');
 const bodyParse = require('body-parser');
 const cookieParse = require('cookie-parser');
@@ -18,7 +17,6 @@ connectDB();
 /* Init midleware */
 app.use(bodyParse.json());
 app.use(cookieParse());
-app.use(helmet());
 app.use(morgan('dev'));
 
 app.use(

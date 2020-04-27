@@ -6,7 +6,15 @@
   "repository": "https://github.com/shivetay/udemy_React_Node_Ecommerce.git",
   "author": "Łukasz Dawidowicz",
   "license": "MIT",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently \" yarn server\" \" yarn client\"",
+    "build": "cd client && yarn install && yarn build"
+  },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
     "cors": "^2.8.5",

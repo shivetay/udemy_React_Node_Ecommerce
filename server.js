@@ -17,6 +17,13 @@ app.use(
   cors({ origin: 'http://localhost:3000', methods: 'GET, POST, PUT, DELETE' })
 );
 
+/* Define routes */
+app.use('/api/test', require('./routes/dummy.routes'));
+
+app.use((req, res) => {
+  res.status(404).send({ message: '404 not found...' });
+});
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`Server running on ${PORT} ^_^`));

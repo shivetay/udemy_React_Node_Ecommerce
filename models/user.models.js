@@ -1,6 +1,8 @@
+// import { v4 as uuidv4 } from 'uuid';
+
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
+const uuidv4 = require('uuid/v4');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -46,7 +48,7 @@ const UserSchema = new mongoose.Schema(
 UserSchema.virtual('password')
   .set(function (password) {
     this._password = password;
-    this.salt = uuidv1();
+    this.salt = uuidv4();
     this.hash_password = this.encryptPassword(password);
   })
   .get(function () {

@@ -5,6 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParse = require('body-parser');
 const cookieParse = require('cookie-parser');
+const expressValidator = require('express-validator');
 
 /* Routes */
 const userRoutes = require('./routes/user.routes');
@@ -18,6 +19,7 @@ connectDB();
 app.use(bodyParse.json());
 app.use(cookieParse());
 app.use(morgan('dev'));
+app.use(expressValidator());
 
 app.use(
   cors({ origin: 'http://localhost:3000', methods: 'GET, POST, PUT, DELETE' })

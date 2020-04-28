@@ -8,7 +8,8 @@ const {
   userSignIn,
 } = require('../controllers/user.controller.js');
 
-const auth = require('../middleware/auth');
+// const auth = require('../middleware/auth');
+const { userValidation } = require('../middleware/validation');
 
 /* 
 @type  GET api/user
@@ -23,7 +24,7 @@ router.get('/user', userGet);
 @descr signup user
 @public
 */
-router.post('/user/signup', userRegister);
+router.post('/user/signup', userValidation, userRegister);
 
 /* 
 @type  POST api/user/sigin

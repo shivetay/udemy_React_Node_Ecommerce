@@ -31,6 +31,6 @@ router.post('/user/signup', userValidation, userRegister);
 @descr sigin user
 @public
 */
-// router.post('/user/sigin', userSignIn);
+router.post('/user/signin', userSignIn);
 
 module.exports = router;

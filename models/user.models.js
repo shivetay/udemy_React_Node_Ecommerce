@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema(
 //password is from client side
 UserSchema.virtual('password')
   .set(function (password) {
-    this._password = password;
+    this._password = password; //_passwor = temp variable
     this.salt = uuidv4();
     this.hash_password = this.encryptPassword(password);
   })
@@ -56,6 +56,9 @@ UserSchema.virtual('password')
   });
 
 UserSchema.methods = {
+  authenticateUser: function (plainPassword) {
+    return this.encryptPassword(plainPassword) === this.hash_password;
+  },
   encryptPassword: function (password) {
     if (!password) return '';
     try {

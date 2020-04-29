@@ -78,3 +78,8 @@ exports.userSignIn = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+exports.userSignOut = (req, res) => {
+  res.clearCookie('t');
+  res.json({ message: 'Signout succes' });
+};

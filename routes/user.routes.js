@@ -6,6 +6,7 @@ const {
   userGet,
   userRegister,
   userSignIn,
+  userSignOut,
 } = require('../controllers/user.controller.js');
 
 // const auth = require('../middleware/auth');
@@ -32,5 +33,13 @@ router.post('/user/signup', userValidation, userRegister);
 @public
 */
 router.post('/user/signin', userSignIn);
+
+/* 
+@type  GET api/user
+@descr sign out user
+@public
+*/
+
+router.get('/user/signout', userSignOut);
 
 module.exports = router;

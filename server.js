@@ -10,6 +10,7 @@ const expressValidator = require('express-validator');
 /* Routes */
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
+const categoryRoutes = require('./routes/category.routes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(
 /* Define routes */
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: '404 not found...' });

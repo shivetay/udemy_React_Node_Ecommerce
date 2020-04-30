@@ -21,14 +21,14 @@ const { userValidation } = require('../middleware/validation');
 router.get('/user', userGet);
 
 /* 
-@type  POST api/user/signup
+@type  POST api/signup
 @descr signup user
 @public
 */
 router.post('/signup', userValidation, userRegister);
 
 /* 
-@type  POST api/user/signin
+@type  POST api/signin
 @descr sigin user
 @public
 */

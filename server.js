@@ -8,7 +8,8 @@ const cookieParse = require('cookie-parser');
 const expressValidator = require('express-validator');
 
 /* Routes */
-const userRoutes = require('./routes/auth.routes');
+const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(
 );
 
 /* Define routes */
+app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 
 app.use((req, res) => {

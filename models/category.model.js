@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-const uuidv4 = require('uuid/v4');
 
 const CategorySchema = new mongoose.Schema(
   {
@@ -9,6 +7,12 @@ const CategorySchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true, //remove spaces
+      maxlength: 32,
+      unique: true,
+    },
+    description: {
+      type: String,
+      max: 32,
     },
   },
   { timestamps: true }

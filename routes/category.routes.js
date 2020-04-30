@@ -5,10 +5,10 @@ const router = express.Router();
 const { createCategory } = require('../controllers/category.controller.js');
 
 /* 
-@type  POST api/create
+@type  POST api/category/create
 @descr create category
 @private
 */
-router.post('/create', createCategory);
+router.post('/category/create', createCategory);
 
 module.exports = router;

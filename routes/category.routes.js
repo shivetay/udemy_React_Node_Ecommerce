@@ -3,12 +3,12 @@ const router = express.Router();
 
 /* import controllers */
 const { createCategory } = require('../controllers/category.controller.js');
+const { findById } = require('../controllers/user.controller.js');
 const {
+  requierSignin,
   isAdmin,
   isAuth,
-  findById,
-} = require('../controllers/user.controller.js');
-const { requierSignin } = require('../controllers/auth.controller.js');
+} = require('../controllers/auth.controller.js');
 
 router.param('userId', findById);
 

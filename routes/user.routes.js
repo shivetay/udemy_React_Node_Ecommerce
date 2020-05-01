@@ -2,22 +2,27 @@ const express = require('express');
 const router = express.Router();
 
 /* import controllers */
+const { findById } = require('../controllers/user.controller.js');
 const {
-  findById,
+  requierSignin,
   isAuth,
   isAdmin,
-} = require('../controllers/user.controller.js');
-const { requierSignin } = require('../controllers/auth.controller.js');
+} = require('../controllers/auth.controller.js');
 
 /* 
 @type   api/userId
 @descr  execute findbyid every time we have userId in our route
 @public
 */
-router.param('userId', findById);
 
-router.post('/test/:userId', isAuth, requierSignin, findById, (req, res) => {
+router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
   res.json({ user: req.profile });
 });
+
+// router.post('/test/:userId', requierSignin, (req, res) => {
+//   res.json({ user: req.profile });
+// });
+
+router.param('userId', findById);
 
 module.exports = router;

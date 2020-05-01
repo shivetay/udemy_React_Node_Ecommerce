@@ -3,7 +3,6 @@ const path = require('path');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const morgan = require('morgan');
-const bodyParse = require('body-parser');
 const cookieParse = require('cookie-parser');
 const expressValidator = require('express-validator');
 
@@ -18,7 +17,7 @@ const app = express();
 connectDB();
 
 /* Init midleware */
-app.use(bodyParse.json());
+app.use(express.json({ extended: false }));
 app.use(cookieParse());
 app.use(morgan('dev'));
 app.use(expressValidator());

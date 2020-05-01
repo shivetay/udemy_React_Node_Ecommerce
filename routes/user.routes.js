@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 /* import controllers */
-const { findById } = require('../controllers/user.controller.js');
 const {
-  requierSignin,
+  findById,
   isAuth,
   isAdmin,
-} = require('../controllers/auth.controller.js');
+} = require('../controllers/user.controller.js');
+const { requierSignin } = require('../controllers/auth.controller.js');
 
 /* 
 @type   api/userId
@@ -16,7 +16,7 @@ const {
 */
 router.param('userId', findById);
 
-router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
+router.post('/test/:userId', isAuth, requierSignin, findById, (req, res) => {
   res.json({ user: req.profile });
 });
 

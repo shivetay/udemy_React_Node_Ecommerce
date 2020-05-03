@@ -95,20 +95,22 @@ exports.userSignOut = (req, res) => {
 
 exports.requierSignin = expressJwt({
   secret: secretJwt,
-  userProperty: 'auth',
+  // userProperty: 'auth',
   // requestProperty: 'auth',
 });
 
 /* check if user is authenticated */
 exports.isAuth = (req, res, next) => {
   /* id we have user that will send id and is auth */
-  let user = req.profile && req.auth && req.profile._id == req.auth._id;
+  const isAuthUser = req.user._id;
+  let user = req.profile._id == isAuthUser;
   // let user = req.profile === req.profile.id;
 
   console.log('profil', req.profile);
   console.log('auth', req.auth);
-  console.log('auth', req.auth._id);
+  // console.log('auth', req.auth._id);
   console.log('id', req.profile._id);
+  console.log('id user', isAuthUser);
   console.log('user', user);
   if (!user) {
     return res.status(403).json({

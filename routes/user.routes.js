@@ -15,7 +15,7 @@ const {
 @public
 */
 
-router.get('/test/:userId', requierSignin, (req, res) => {
+router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
   res.json(req.profile);
 });
 

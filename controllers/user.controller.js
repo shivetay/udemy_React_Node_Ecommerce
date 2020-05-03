@@ -2,7 +2,6 @@ const User = require('../models/user.models');
 
 //user middleware
 exports.findById = async (req, res, next, id) => {
-  console.log('id from findById', id);
   try {
     let user = await User.findById(id);
     if (!user) {
@@ -15,7 +14,6 @@ exports.findById = async (req, res, next, id) => {
       });
     }
     req.profile = user; // this will get user profile based on User
-    console.log('id after req.profile = user', req.profile._id);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

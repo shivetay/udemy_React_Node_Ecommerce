@@ -35,7 +35,7 @@ exports.userRegister = async (req, res) => {
 
 /* user sign in */
 exports.userSignIn = async (req, res) => {
-  const { _id, email, password } = req.body;
+  const { id, email, password } = req.body;
   try {
     //find user by email
     let user = await User.findOne({ email });
@@ -58,28 +58,23 @@ exports.userSignIn = async (req, res) => {
       });
     }
     // generate a token with id and secret
-    const token = jwt.sign({ _id: _id }, secretJwt);
+    const token = jwt.sign({ id: id }, secretJwt);
 
     //keep token in cookie
     res.cookie('t', token, {
       expire: new Date() + 9999,
     });
-    // const payload = {
-    //   user: {
-    //     id: user._id,
-    //     email: user.email,
-    //     name: user.name,
-    //     role: user.role,
-    //   },
-    // };
-    return res.json({
-      token,
+    const payload = {
       user: {
         id: user._id,
         email: user.email,
         name: user.name,
         role: user.role,
       },
+    };
+    return res.json({
+      token,
+      payload,
     });
   } catch (err) {
     console.error(err.message);
@@ -95,23 +90,14 @@ exports.userSignOut = (req, res) => {
 
 exports.requierSignin = expressJwt({
   secret: secretJwt,
-  // userProperty: 'auth',
-  // requestProperty: 'auth',
+  userProperty: 'auth',
 });
 
 /* check if user is authenticated */
 exports.isAuth = (req, res, next) => {
   /* id we have user that will send id and is auth */
-  const isAuthUser = req.user._id;
-  let user = req.profile._id == isAuthUser;
-  // let user = req.profile === req.profile.id;
+  let user = req.profile && req.auth && req.profile._id == req.auth._id;
 
-  console.log('profil', req.profile);
-  console.log('auth', req.auth);
-  // console.log('auth', req.auth._id);
-  console.log('id', req.profile._id);
-  console.log('id user', isAuthUser);
-  console.log('user', user);
   if (!user) {
     return res.status(403).json({
       errors: [

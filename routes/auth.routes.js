@@ -7,7 +7,6 @@ const {
   userRegister,
   userSignIn,
   userSignOut,
-  requierSignin,
 } = require('../controllers/auth.controller.js');
 
 const { userValidation } = require('../middleware/validation');

@@ -19,7 +19,7 @@ router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
   res.json({ user: req.profile });
 });
 
-// router.post('/test/:userId', requierSignin, (req, res) => {
+// router.get('/test/:userId', requierSignin, (req, res) => {
 //   res.json({ user: req.profile });
 // });
 

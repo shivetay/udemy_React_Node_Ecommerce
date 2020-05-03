@@ -17,6 +17,12 @@ router.param('userId', findById);
 @descr create category
 @private
 */
-router.post('/category/create/:userId', requierSignin, isAdmin, createCategory);
+router.post(
+  '/category/create/:userId',
+  requierSignin,
+  isAuth,
+  isAdmin,
+  createCategory
+);
 
 module.exports = router;

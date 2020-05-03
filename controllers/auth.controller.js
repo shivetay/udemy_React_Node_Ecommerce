@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken'); //generate token
 const expressJwt = require('express-jwt'); //auth check
 
 const User = require('../models/user.models');
-const secret = config.get('jwtSecret');
+const secretJwt = config.get('jwtSecret');
 
 exports.userGet = async (req, res) => {
   try {
@@ -58,21 +58,29 @@ exports.userSignIn = async (req, res) => {
       });
     }
     // generate a token with id and secret
-    const token = jwt.sign({ _id: _id }, secret);
+    const token = jwt.sign({ _id: _id }, secretJwt);
 
     //keep token in cookie
     res.cookie('t', token, {
       expire: new Date() + 9999,
     });
-    const payload = {
+    // const payload = {
+    //   user: {
+    //     id: user._id,
+    //     email: user.email,
+    //     name: user.name,
+    //     role: user.role,
+    //   },
+    // };
+    return res.json({
+      token,
       user: {
         id: user._id,
         email: user.email,
         name: user.name,
         role: user.role,
       },
-    };
-    return res.json({ token, payload });
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -86,17 +94,20 @@ exports.userSignOut = (req, res) => {
 };
 
 exports.requierSignin = expressJwt({
-  secret,
-  userProperpty: 'auth',
+  secret: secretJwt,
+  userProperty: 'auth',
+  // requestProperty: 'auth',
 });
 
 /* check if user is authenticated */
 exports.isAuth = (req, res, next) => {
   /* id we have user that will send id and is auth */
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
+  // let user = req.profile === req.profile.id;
 
-  console.log(req.profile);
+  console.log('profil', req.profile);
   console.log('auth', req.auth);
+  console.log('auth', req.auth._id);
   console.log('id', req.profile._id);
   console.log('user', user);
   if (!user) {

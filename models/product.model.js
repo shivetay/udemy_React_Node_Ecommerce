@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { ObejctId } = mongoose.Schema;
+// const { ObejctId } = mongoose.Schema;
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -22,8 +22,9 @@ const ProductSchema = new mongoose.Schema(
       require: true,
     },
     category: {
-      type: ObejctId,
+      type: mongoose.Schema.ObjectId,
       ref: 'category',
+      require: true,
     },
     quantity: {
       type: Number,
@@ -31,6 +32,10 @@ const ProductSchema = new mongoose.Schema(
     photo: {
       data: Buffer,
       contentType: String,
+    },
+    shipping: {
+      require: true,
+      type: Boolean,
     },
   },
   { timestamps: true }

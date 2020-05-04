@@ -3,7 +3,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken'); //generate token
 const expressJwt = require('express-jwt'); //auth check
 
-const User = require('../models/user.models');
+const User = require('../models/user.model');
 const secretJwt = config.get('jwtSecret');
 
 exports.userGet = async (req, res) => {

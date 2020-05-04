@@ -1,4 +1,4 @@
-const User = require('../models/user.models');
+const User = require('../models/user.model');
 
 //user middleware
 exports.findById = async (req, res, next, id) => {
@@ -20,14 +20,3 @@ exports.findById = async (req, res, next, id) => {
   }
   next();
 };
-// exports.findById = (req, res, next, id) => {
-//   User.findById(id).exec((err, user) => {
-//     if (err || !user) {
-//       return res.status(401).json({
-//         errors: [{ msg: 'User not found' }],
-//       });
-//     }
-//     req.profile = user;
-//     next();
-//   });
-// };

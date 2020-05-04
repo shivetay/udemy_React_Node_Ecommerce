@@ -16,10 +16,32 @@ exports.createProduct = (req, res) => {
         .status(400)
         .json({ errors: [{ msg: 'Image could not be uploaded' }] });
     }
+    // check for all fields
+    const { name, description, price, category, quantity, shipping } = fields;
+
+    if (
+      !name ||
+      !description ||
+      !price ||
+      !category ||
+      !quantity ||
+      !shipping
+    ) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'All fields are requierd' }] });
+    }
     let product = new Product(fields);
 
+    //1kb = 1000
+    //1mb = 1000000kb
     //name 'photo' mus match client side. use photo
     if (files.photo) {
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({
+          errors: [{ msg: 'Image could not be uploaded. File to big.' }],
+        });
+      }
       //this relates to data in schema product
       product.photo.data = fs.readFileSync(files.photo.path);
       product.photo.contentType = files.photo.type;

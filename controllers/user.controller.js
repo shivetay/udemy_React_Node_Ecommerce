@@ -14,9 +14,9 @@ exports.findById = async (req, res, next, id) => {
       });
     }
     req.profile = user; // this will get user profile based on User
+    next();
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
-  next();
 };

@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 /* import controlers */
-const { createProduct } = require('../controllers/product.controller');
+const {
+  createProduct,
+  findProductById,
+} = require('../controllers/product.controller');
 const {
   requierSignin,
   isAdmin,
@@ -11,6 +14,7 @@ const {
 const { findById } = require('../controllers/user.controller.js');
 
 router.param('userId', findById);
+router.param('productId', findProductById);
 
 router.post(
   '/product/create/:userId',

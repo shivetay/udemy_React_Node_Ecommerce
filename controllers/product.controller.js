@@ -4,6 +4,27 @@ const fs = require('fs');
 
 const Product = require('../models/product.model');
 
+/* find product by id */
+exports.findProductById = async (req, res, next, id) => {
+  try {
+    let product = await Product.findById(id);
+    if (!product) {
+      return res.status(401).json({
+        errors: [
+          {
+            msg: 'Product not found',
+          },
+        ],
+      });
+    }
+    req.product = product;
+    next();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+};
+
 /* create product */
 //TODO: change to async
 exports.createProduct = (req, res) => {

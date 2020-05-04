@@ -35,7 +35,7 @@ exports.userRegister = async (req, res) => {
 
 /* user sign in */
 exports.userSignIn = async (req, res) => {
-  const { id, email, password } = req.body;
+  const { _id, email, password } = req.body;
   try {
     //find user by email
     let user = await User.findOne({ email });
@@ -58,7 +58,7 @@ exports.userSignIn = async (req, res) => {
       });
     }
     // generate a token with id and secret
-    const token = jwt.sign({ id: id }, secretJwt);
+    const token = jwt.sign({ _id: user._id }, secretJwt);
 
     //keep token in cookie
     res.cookie('t', token, {
@@ -66,7 +66,7 @@ exports.userSignIn = async (req, res) => {
     });
     const payload = {
       user: {
-        id: user._id,
+        _id: user._id,
         email: user.email,
         name: user.name,
         role: user.role,
@@ -81,6 +81,40 @@ exports.userSignIn = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+// exports.userSignIn = (req, res) => {
+//   // find the user based on email
+//   const { email, password } = req.body;
+//   User.findOne({ email }, (err, user) => {
+//     if (err || !user) {
+//       return res.status(401).json({
+//         errors: [
+//           {
+//             msg: 'Invalid credentials',
+//           },
+//         ],
+//       });
+//     }
+//     // if user is found make sure the email and password match
+//     // create authenticate method in user model
+//     if (!user.authenticateUser(password)) {
+//       return res.status(401).json({
+//         errors: [
+//           {
+//             msg: 'Invalid credentials',
+//           },
+//         ],
+//       });
+//     }
+//     // generate a signed token with user id and secret
+//     const token = jwt.sign({ _id: user._id }, secretJwt);
+//     // persist the token as 't' in cookie with expiry date
+//     res.cookie('t', token, { expire: new Date() + 9999 });
+//     // return response with user and token to frontend client
+//     const { _id, name, email, role } = user;
+//     return res.json({ token, user: { _id, email, name, role } });
+//   });
+// };
 
 /* user sign out */
 exports.userSignOut = (req, res) => {

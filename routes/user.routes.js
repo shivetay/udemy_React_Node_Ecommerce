@@ -9,6 +9,8 @@ const {
   isAdmin,
 } = require('../controllers/auth.controller.js');
 
+router.param('userId', findById);
+
 /* 
 @type   api/userId
 @descr  execute findbyid every time we have userId in our route
@@ -18,7 +20,5 @@ const {
 router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
   res.json(req.profile);
 });
-
-router.param('userId', findById);
 
 module.exports = router;

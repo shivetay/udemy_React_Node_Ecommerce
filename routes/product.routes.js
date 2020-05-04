@@ -15,7 +15,7 @@ router.param('userId', findById);
 router.post(
   '/product/create/:userId',
   requierSignin,
-  isAuth,
+  // isAuth,
   isAdmin,
   createProduct
 );

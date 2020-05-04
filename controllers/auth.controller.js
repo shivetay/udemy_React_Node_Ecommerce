@@ -98,6 +98,12 @@ exports.isAuth = (req, res, next) => {
   /* id we have user that will send id and is auth */
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
 
+  console.log('auth id', req.auth._id);
+  console.log('auth', req.auth);
+  console.log('profile id', req.profile._id);
+  console.log('profile', req.profile);
+  console.log('user', user);
+
   if (!user) {
     return res.status(403).json({
       errors: [

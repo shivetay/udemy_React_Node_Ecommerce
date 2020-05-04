@@ -19,10 +19,6 @@ router.get('/test/:userId', requierSignin, isAuth, (req, res) => {
   res.json(req.profile);
 });
 
-// router.get('/test/:userId', requierSignin, (req, res) => {
-//   res.json({ user: req.user });
-// });
-
 router.param('userId', findById);
 
 module.exports = router;

@@ -16,10 +16,23 @@ const { findById } = require('../controllers/user.controller.js');
 router.param('userId', findById);
 router.param('productId', findProductById);
 
+/* 
+@type   /product/productId
+@descr  find product
+@private
+*/
+router.get('/product/:productId', getProduct);
+
+/* 
+@type   '/product/create/:userId'
+@descr  create new product
+@private
+*/
+
 router.post(
   '/product/create/:userId',
   requierSignin,
-  // isAuth,
+  isAuth,
   isAdmin,
   createProduct
 );

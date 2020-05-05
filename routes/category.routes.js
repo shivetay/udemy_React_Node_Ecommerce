@@ -2,7 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 /* import controllers */
-const { createCategory } = require('../controllers/category.controller.js');
+const {
+  createCategory,
+  categoryById,
+  readCategory,
+  updateCategory,
+  deleteCategory,
+  getAllCategories,
+} = require('../controllers/category.controller.js');
 const { findById } = require('../controllers/user.controller.js');
 const {
   requierSignin,
@@ -11,6 +18,7 @@ const {
 } = require('../controllers/auth.controller.js');
 
 router.param('userId', findById);
+router.param('categoryId', categoryById);
 
 /* 
 @type  POST api/category/create
@@ -25,4 +33,44 @@ router.post(
   createCategory
 );
 
+/* 
+@type   /category/:categorytId
+@descr  find category
+@private
+*/
+
+router.get(
+  '/category/:categoryId/:userId',
+  requierSignin,
+  isAdmin,
+  readCategory
+);
+
+/* 
+@type   /category/:categorytId
+@descr  update category
+@private
+*/
+
+router.put(
+  '/category/:categoryId/:userId',
+  requierSignin,
+  isAdmin,
+  updateCategory
+);
+
+/* 
+@type   /category/:categorytId
+@descr  delete category
+@private
+*/
+
+router.delete(
+  '/category/:categoryId/:userId',
+  requierSignin,
+  isAdmin,
+  deleteCategory
+);
+
+router.get('/categories', getAllCategories);
 module.exports = router;

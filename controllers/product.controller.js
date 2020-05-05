@@ -106,16 +106,6 @@ exports.removeProduct = async (req, res) => {
 };
 
 /* update product */
-
-// exports.updateProduct = async (req, res) =>{
-//   try{
-
-//   }catch(err){
-//     console.error(err.message);
-//     res.status(500).send('Server error');
-//   }
-// }
-
 exports.updateProduct = async (req, res) => {
   try {
     //form data is avalible from new formidable.incoming form

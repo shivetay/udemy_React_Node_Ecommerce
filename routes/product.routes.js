@@ -5,6 +5,9 @@ const router = express.Router();
 const {
   createProduct,
   findProductById,
+  getProduct,
+  removeProduct,
+  updateProduct,
 } = require('../controllers/product.controller');
 const {
   requierSignin,
@@ -17,7 +20,7 @@ router.param('userId', findById);
 router.param('productId', findProductById);
 
 /* 
-@type   /product/productId
+@type   /product/:productId
 @descr  find product
 @private
 */
@@ -35,6 +38,32 @@ router.post(
   isAuth,
   isAdmin,
   createProduct
+);
+
+/* 
+@type   /product/:productId/:userId
+@descr  delete product
+@private
+*/
+router.delete(
+  '/product/:productId/:userId',
+  requierSignin,
+  isAuth,
+  isAdmin,
+  removeProduct
+);
+
+/* 
+@type   /product/:productId
+@descr  update product
+@private
+*/
+router.put(
+  '/product/:productId/:userId',
+  requierSignin,
+  isAuth,
+  isAdmin,
+  updateProduct
 );
 
 module.exports = router;

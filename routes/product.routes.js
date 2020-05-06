@@ -12,6 +12,7 @@ const {
   listRelated,
   listAllCategories,
   listBySearch,
+  getPhoto,
 } = require('../controllers/product.controller');
 const {
   requierSignin,
@@ -90,13 +91,20 @@ router.get('/products/related/:productId', listRelated);
 @public
 */
 
-router.get('products/categories', listAllCategories);
+router.get('/products/categories', listAllCategories);
 
 /* 
 @type   /products/by/search
-@descr  get all category related products
+@descr  search
 @public
 */
-router.post('products/by/search', listBySearch);
+router.post('/products/by/search', listBySearch);
+
+/* 
+@type   /product/photo/:productId
+@descr  getPhoto
+@provate
+*/
+router.get('/product/photo/:productId', getPhoto);
 
 module.exports = router;

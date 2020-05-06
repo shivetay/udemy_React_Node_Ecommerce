@@ -60,7 +60,7 @@ router.put(
 );
 
 /* 
-@type   /category/:categorytId
+@type   /category/:categorytId/:userIs
 @descr  delete category
 @private
 */
@@ -72,5 +72,12 @@ router.delete(
   deleteCategory
 );
 
+/* 
+@type   /category/:categorytId
+@descr  get category
+@private
+*/
+
 router.get('/categories', getAllCategories);
+
 module.exports = router;

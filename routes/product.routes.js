@@ -8,6 +8,10 @@ const {
   getProduct,
   removeProduct,
   updateProduct,
+  list,
+  listRelated,
+  listAllCategories,
+  listBySearch,
 } = require('../controllers/product.controller');
 const {
   requierSignin,
@@ -65,5 +69,34 @@ router.put(
   isAdmin,
   updateProduct
 );
+
+/* 
+@type   /products
+@descr  return all products
+@public
+*/
+router.get('/products', list);
+
+/* 
+@type   /products/related/:productId
+@descr  return all products
+@public
+*/
+router.get('/products/related/:productId', listRelated);
+
+/* 
+@type   products/categories
+@descr  get all category related products
+@public
+*/
+
+router.get('products/categories', listAllCategories);
+
+/* 
+@type   /products/by/search
+@descr  get all category related products
+@public
+*/
+router.post('products/by/search', listBySearch);
 
 module.exports = router;

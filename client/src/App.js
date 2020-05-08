@@ -9,7 +9,6 @@ import Home from './components/views/Home/Home';
 function App() {
   return (
     <BrowserRouter>
-      <h1>App.js</h1>
       <MainLayout>
         <Switch>
           <Route exact path='/' component={Home} />

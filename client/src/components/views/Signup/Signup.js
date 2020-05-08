@@ -1,10 +1,14 @@
 import React from 'react';
 
+import Layout from '../../layout/Layout/Layout';
+
 const Signup = () => {
   return (
-    <div>
-      <h1>sign up</h1>
-    </div>
+    <section>
+      <Layout title='Signup' description=''>
+        <h3> Signup </h3>
+      </Layout>
+    </section>
   );
 };
 

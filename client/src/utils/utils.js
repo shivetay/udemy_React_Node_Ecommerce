@@ -7,6 +7,12 @@ export const signOut = () => {
   }
 };
 
+export const authenticateUser = data => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('jwt', JSON.stringify(data));
+  }
+};
+
 //check if user is auth and there is jwt item in localstorage. menu render
 export const isAuthUser = () => {
   if (typeof window == 'undefined') {

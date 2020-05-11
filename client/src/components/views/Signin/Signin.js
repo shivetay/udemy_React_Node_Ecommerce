@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import Layout from '../../layout/Layout/Layout';
+import { authenticateUser, isAuthUser } from '../../../utils/utils';
 
 class Signin extends Component {
   state = {
@@ -11,12 +12,6 @@ class Signin extends Component {
       password: '',
     },
     userRedirect: false,
-  };
-
-  authenticateUser = data => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('jwt', JSON.stringify(data));
-    }
   };
 
   onChange = e => {
@@ -37,7 +32,7 @@ class Signin extends Component {
     };
     axios
       .post('http://localhost:8000/api/signin', user, config)
-      .then(res => this.authenticateUser(res.data));
+      .then(res => authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
       userRedirect: true,
@@ -79,14 +74,20 @@ class Signin extends Component {
 
   redirecUser = () => {
     const { userRedirect } = this.state;
+    const { user } = isAuthUser();
 
     if (userRedirect === true) {
-      return <Redirect to='/' />;
+      if (user && user.role === 1) {
+        return <Redirect to='/admin/dashboard' />;
+      } else {
+        return <Redirect to='/user/dashboard' />;
+      }
     }
   };
 
   render() {
     const { email, password } = this.state.formData;
+
     return (
       <Layout
         title='Signin'

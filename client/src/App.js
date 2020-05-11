@@ -5,6 +5,8 @@ import MainLayout from '../src/components/layout/MainLayout/MainLayout';
 import Signup from './components/views/Signup/Signup';
 import Signin from './components/views/Signin/Signin';
 import Home from './components/views/Home/Home';
+import PrivateRoute from './components/common/ProvateRoute/PrivateRoute';
+import UserDashboard from './components/views/UserDashboard/UserDashboard';
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/signin' component={Signin} />
           <Route exact path='/signup' component={Signup} />
+          <PrivateRoute exact path='/dashboard' component={UserDashboard} />
         </Switch>
       </MainLayout>
     </BrowserRouter>

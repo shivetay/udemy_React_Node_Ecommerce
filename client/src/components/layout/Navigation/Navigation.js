@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import { signOut, isAuthUser } from '../../../utils/utils';
@@ -12,15 +12,19 @@ const isActive = (history, path) => {
 };
 
 const Navigation = ({ history }) => {
-  // useEffect(() => {
-  //   isAuthUser();
-  // }, []);
   return (
     <nav>
       <ul className='nav nav-tabs bg-primary'>
         <li className='nav-item'>
           <Link className='nav-link' style={isActive(history, '/')} to='/'>
             Home
+          </Link>
+          <Link
+            className='nav-link'
+            style={isActive(history, '/dashboard')}
+            to='/dashboard'
+          >
+            Dashboard
           </Link>
           {!isAuthUser() && (
             <div>

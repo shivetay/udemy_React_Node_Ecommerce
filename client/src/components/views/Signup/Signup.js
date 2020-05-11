@@ -29,6 +29,9 @@ class Signup extends Component {
       },
     };
     axios.post('http://localhost:8000/api/signup', user, config).then(res => res.data);
+    this.setState({
+      formData: { name: '', email: '', password: '' },
+    });
   };
 
   onSubmit = e => {

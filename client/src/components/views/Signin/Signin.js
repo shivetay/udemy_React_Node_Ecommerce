@@ -13,6 +13,12 @@ class Signin extends Component {
     userRedirect: false,
   };
 
+  authenticateUser = data => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('jwt', JSON.stringify(data));
+    }
+  };
+
   onChange = e => {
     const { formData } = this.state;
     //assign form data to new variable
@@ -29,7 +35,9 @@ class Signin extends Component {
         'Content-Type': 'application/json',
       },
     };
-    axios.post('http://localhost:8000/api/signin', user, config).then(res => res.data);
+    axios
+      .post('http://localhost:8000/api/signin', user, config)
+      .then(res => this.authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
       userRedirect: true,
@@ -76,6 +84,7 @@ class Signin extends Component {
       return <Redirect to='/' />;
     }
   };
+
   render() {
     const { email, password } = this.state.formData;
     return (

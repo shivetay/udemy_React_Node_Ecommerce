@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+
+import { signOut, isAuthUser } from '../../../utils/utils';
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -10,6 +12,9 @@ const isActive = (history, path) => {
 };
 
 const Navigation = ({ history }) => {
+  // useEffect(() => {
+  //   isAuthUser();
+  // }, []);
   return (
     <nav>
       <ul className='nav nav-tabs bg-primary'>
@@ -17,12 +22,34 @@ const Navigation = ({ history }) => {
           <Link className='nav-link' style={isActive(history, '/')} to='/'>
             Home
           </Link>
-          <Link className='nav-link' style={isActive(history, '/signup')} to='/signup'>
-            Signup
-          </Link>
-          <Link className='nav-link' style={isActive(history, '/signin')} to='/signin'>
-            Signin
-          </Link>
+          {!isAuthUser() && (
+            <div>
+              <Link
+                className='nav-link'
+                style={isActive(history, '/signup')}
+                to='/signup'
+              >
+                Signup
+              </Link>
+              <Link
+                className='nav-link'
+                style={isActive(history, '/signin')}
+                to='/signin'
+              >
+                Signin
+              </Link>
+            </div>
+          )}
+          {isAuthUser() && (
+            <Link
+              className='nav-link'
+              style={isActive(history, '/signout')}
+              onClick={() => signOut()}
+              to='/'
+            >
+              Sign Out
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

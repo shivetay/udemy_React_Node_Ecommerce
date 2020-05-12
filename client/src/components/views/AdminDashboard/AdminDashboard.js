@@ -5,26 +5,26 @@ import { isAuthUser } from '../../../utils/utils';
 
 import Layout from '../../layout/Layout/Layout';
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
   const {
     payload: {
       user: { name, email, role },
     },
   } = isAuthUser();
 
-  const userLinks = () => {
+  const adminLinks = () => {
     return (
       <div className='card'>
-        <h4 className='card-header'>User Links</h4>
+        <h4 className='card-header'>Admin Links</h4>
         <ul className='list-group'>
           <li className='list-group-item'>
-            <Link to='/cart' className='nav-link'>
-              My Cart
+            <Link to='/create/category' className='nav-link'>
+              Create Category
             </Link>
           </li>
           <li className='list-group-item'>
-            <Link to='/profile/update' className='nav-link'>
-              Profile Update
+            <Link to='/create/product' className='nav-link'>
+              Create Product
             </Link>
           </li>
         </ul>
@@ -32,7 +32,7 @@ const UserDashboard = () => {
     );
   };
 
-  const userInfo = () => {
+  const adminInfo = () => {
     return (
       <div className='card mb-5'>
         <h3 className='card-header'>User information</h3>
@@ -47,17 +47,6 @@ const UserDashboard = () => {
     );
   };
 
-  const userHistory = () => {
-    return (
-      <div className='card'>
-        <h3 className='card-header'>Purchase history</h3>
-        <ul className='list-group'>
-          <li className='list-group-item'>History</li>
-        </ul>
-      </div>
-    );
-  };
-
   return (
     <Layout
       title='User Dashboard'
@@ -65,14 +54,11 @@ const UserDashboard = () => {
       className='container col-md-8 offset-md-2'
     >
       <div className='row'>
-        <div className='col-3'>{userLinks()}</div>
-        <div className='col-9'>
-          {userInfo()}
-          {userHistory()}
-        </div>
+        <div className='col-3'>{adminLinks()}</div>
+        <div className='col-9'>{adminInfo()}</div>
       </div>
     </Layout>
   );
 };
 
-export default UserDashboard;
+export default AdminDashboard;

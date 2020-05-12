@@ -26,6 +26,13 @@ const Navigation = ({ history }) => {
           >
             Dashboard
           </Link>
+          <Link
+            className='nav-link'
+            style={isActive(history, '/admin/dashboard')}
+            to='/admin/dashboard'
+          >
+            Admin Dashboard
+          </Link>
           {!isAuthUser() && (
             <div>
               <Link

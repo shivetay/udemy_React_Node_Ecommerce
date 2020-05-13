@@ -10,6 +10,7 @@ import AdminRoute from './components/common/ProvateRoute/AdminRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
 import CreateCategory from './components/features/Category/CreateCategory';
+import CreateProduct from './components/features/Product/CreateProduct';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/signin' component={Signin} />
           <Route exact path='/signup' component={Signup} />
-          <Route exact path='/create/category' component={CreateCategory} />
+          <AdminRoute exact path='/create/category' component={CreateCategory} />
+          <AdminRoute exact path='/create/product' component={CreateProduct} />
           <PrivateRoute exact path='/user/dashboard' component={UserDashboard} />
           <AdminRoute exact path='/admin/dashboard' component={AdminDashboard} />
         </Switch>
